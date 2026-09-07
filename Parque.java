@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Parque {
@@ -7,6 +7,8 @@ public class Parque {
     private String nombreEncargado;
     private PuntoDeAcceso[] puntosDeAcceso;
     private ArrayList<Visitante> visitantes;
+
+    Scanner scanner = new Scanner(System.in);
 
     public Parque(String nombre, int codigoIdentificacion, String nombreEncargado){
         this.nombre = nombre;
