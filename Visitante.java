@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class Visitante {
     private int codigoDeEntrada;
@@ -7,12 +7,14 @@ public class Visitante {
     private int atraccionesVisitadas;
     private int puntosAcumulados;
 
-    public Visitante(int codigoDeEntrada, String nombre, int edad, int atraccionesVisitadas, int puntosAcumulados) {
-        this.codigoDeEntrada = codigoDeEntrada;
-        this.nombre = nombre;
-        setEdad(edad);
-        setAtraccionesVisitadas(atraccionesVisitadas);
-        setPuntosAcumulados(puntosAcumulados);
+    Scanner scanner = new Scanner(System.in);
+
+    public Visitante() {
+        this.codigoDeEntrada = setCodigoDeEntrada();
+        this.nombre = setNombre();
+        this.edad = setEdad();
+        this.puntosAcumulados = setPuntosAcumulados();
+        this.atraccionesVisitadas = setAtraccionesVisitadas();
     }
 
     public int getCodigoDeEntrada() {
@@ -34,30 +36,91 @@ public class Visitante {
     public int getPuntosAcumulados() {
         return puntosAcumulados;
     }
+    
+    public int setCodigoDeEntrada(){
+        System.out.println("Ingrese el código de entrada: ");
+        while(true){
+            try{
+            int codigoDeEntrada = scanner.nextInt();
+            scanner.nextLine();
+            if (codigoDeEntrada<=0){
+                throw new IllegalArgumentException("Este valor no es válido, intente de nuevo: ");
+            }
+            return codigoDeEntrada;
+        }catch (Exception e){
+        System.out.println("Este valor no es válido, intente de nuevo: ");
+        codigoDeEntrada = scanner.nextInt();
+        scanner.nextLine();
+        }
+    }
+        
+    }
+    public String setNombre() {
+        System.out.println("Ingrese su nombre: ");
+        this.nombre = scanner.nextLine();
+        return nombre;
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
-    public void setEdad(int edad) {
+    public int setEdad() {
+        while (true){
+        try{
+        System.out.println("Ingrese su edad: ");
+        this.edad = scanner.nextInt();
+        scanner.nextLine();
         if (edad <= 0) {
             throw new IllegalArgumentException("La edad debe ser un número positivo.");
         }
-        this.edad = edad;
-    }
 
-    public void setAtraccionesVisitadas(int atraccionesVisitadas) {
-        if (atraccionesVisitadas < 0) {
-            throw new IllegalArgumentException("El número de atracciones visitadas no puede ser negativo.");
+        return this.edad;
+    }catch(Exception e){
+        System.out.println("No se puede imprimir este valor, intente de nuevo: ");
+        this.edad = scanner.nextInt();
+        scanner.nextLine();
+    }
+    } 
+}
+
+    public int setAtraccionesVisitadas() {
+        while(true){
+        try{
+        System.out.println("Ingrese la cantidad de atracciones: ");
+        this.atraccionesVisitadas = scanner.nextInt();
+        scanner.nextLine();
+        
+        if (atraccionesVisitadas<0){
+            throw new IllegalArgumentException("Las atracciones deben de ser un número positivo");
         }
-        this.atraccionesVisitadas = atraccionesVisitadas;
-    }
+        return this.atraccionesVisitadas;
+        
 
-    public void setPuntosAcumulados(int puntosAcumulados) {
+        } catch (Exception e){
+            System.out.println("No se puede ingresar este valor, intente de nuevo: ");
+            this.atraccionesVisitadas = scanner.nextInt();
+            scanner.nextLine();
+        }
+    }
+}
+    public int setPuntosAcumulados() {
+        System.out.println("Ingrese la cantidad de puntos acumulados: ");
+        while(true){
+        try{
+
+        
+        
+        this.puntosAcumulados = scanner.nextInt();
+        scanner.nextLine();
+
         if (puntosAcumulados < 0) {
             throw new IllegalArgumentException("Los puntos acumulados no pueden ser negativos.");
         }
-        this.puntosAcumulados = puntosAcumulados;
+        return this.puntosAcumulados;
+    } catch (Exception e){
+        System.out.println("Este valor no es válido, intente de nuevo: ");
+        this.puntosAcumulados = scanner.nextInt();
+        scanner.nextLine();
+    }
+}
     }   
     
     public void mostrarInformacion() {
