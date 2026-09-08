@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Parque {
@@ -8,10 +8,13 @@ public class Parque {
     private PuntoDeAcceso[] puntosDeAcceso;
     private ArrayList<Visitante> visitantes;
 
-    public Parque(String nombre, int codigoIdentificacion, String nombreEncargado){
-        this.nombre = nombre;
-        this.codigoIdentificacion = codigoIdentificacion;
-        this.nombreEncargado = nombreEncargado;
+
+    Scanner scanner = new Scanner(System.in);
+
+    public Parque(){
+        this.nombre = setNombre();
+        this.codigoIdentificacion = setCodigoIdentificacion();
+        this.nombreEncargado = setNombreEncargado();
         this.puntosDeAcceso = new PuntoDeAcceso[5];
         this.visitantes = new ArrayList<Visitante>();
     }
@@ -20,9 +23,36 @@ public class Parque {
     public String getNombre() {
         return nombre;
     }
+    public String setNombre(){
+        System.out.println("Ingrese el nombre del parque: ");
+        this.nombre = scanner.nextLine();
+        return nombre;
+    }
 
     public int getCodigoIdentificacion() {
         return codigoIdentificacion;
+    }
+
+    public int setCodigoIdentificacion(){
+        while(true){
+        try{  
+        System.out.println("Ingrese el código del parque: ");
+        this.codigoIdentificacion = scanner.nextInt();
+        scanner.nextLine();
+        if(codigoIdentificacion<=0){
+            throw new IllegalArgumentException("Este valor es inválido");
+        }
+        return this.codigoIdentificacion;
+        }catch (Exception e){
+            System.out.println("Este valor es inválido, intente de nuevo");
+
+        }
+    }
+    }
+    public String setNombreEncargado(){
+        System.out.println("Ingrese el nombre del encargado del parque: ");
+        this.nombreEncargado = scanner.nextLine();
+        return nombreEncargado;
     }
 
     public String getNombreEncargado() {
@@ -33,25 +63,21 @@ public class Parque {
         return posicion >= 0 && posicion < puntosDeAcceso.length;
     }
 
-    public boolean habilitarPuntoDeAcceso(int posicion, PuntoDeAcceso puntoDeAcceso) {
+    public boolean habilitarPuntoDeAcceso(int posicion) {
         if (!posicionValida(posicion)){
             return false;
         }
-        if (puntosDeAcceso[posicion] != null) {
-            return false;
-        }
-        if (puntoDeAcceso == null) {
-            return false;
-        }
-        puntosDeAcceso[posicion] = puntoDeAcceso;
+
+        puntosDeAcceso[posicion] = new PuntoDeAcceso();
         return true;
     }
 
-    public PuntoDeAcceso obtenerPuntoDeAcceso(int posicion) {
-        if (!posicionValida(posicion)) {
+    public PuntoDeAcceso obtenerPuntoDeAcceso(int posicion2) {
+        if (!posicionValida(posicion2)) {
+            System.out.println("No hay un punto de acceso en esta posición");
             return null;
         }
-        return puntosDeAcceso[posicion];
+        return puntosDeAcceso[posicion2];
     }
 
     public void mostrarPuntosDeAcceso() {
@@ -70,15 +96,15 @@ public class Parque {
         }
     }
 
-    public boolean modificarPuntoDeAcceso(int posicion, int nuevaCapacidad, String nuevoEstado) {
-        if (!posicionValida(posicion)) {
+    public boolean modificarPuntoDeAcceso(int posicion2) {
+        if (!posicionValida(posicion2)) {
             return false;
         }
-        if (puntosDeAcceso[posicion] == null) {
+        if (puntosDeAcceso[posicion2] == null) {
             return false;
         }
-        puntosDeAcceso[posicion].setCapacidadMaximaPorHora(nuevaCapacidad);
-        puntosDeAcceso[posicion].setEstado(nuevoEstado);
+        puntosDeAcceso[posicion2].setCapacidadMaximaPorHora();
+        puntosDeAcceso[posicion2].setEstado();
         
         return true;
     }
@@ -151,24 +177,15 @@ public class Parque {
         }
     }
 
-    public boolean modificarVisitante(int codigoDeEntrada, String nuevoNombre, int nuevaEdad, int nuevasAtracciones, int nuevosPuntos) {
+    public boolean modificarVisitante(int codigoDeEntrada) {
         Visitante visitante = buscarVisitante(codigoDeEntrada);
         if (visitante == null) {
             return false;
         }
-        if (nuevaEdad <= 0) {
-            throw new IllegalArgumentException("La edad debe ser un número positivo.");
-        }
-        if (nuevasAtracciones < 0) {
-            throw new IllegalArgumentException("El número de atracciones visitadas no puede ser negativo.");
-        }
-        if (nuevosPuntos < 0) {
-            throw new IllegalArgumentException("Los puntos acumulados no pueden ser negativos.");
-        }
-        visitante.setNombre(nuevoNombre);
-        visitante.setEdad(nuevaEdad);
-        visitante.setAtraccionesVisitadas(nuevasAtracciones);
-        visitante.setPuntosAcumulados(nuevosPuntos);
+        visitante.setNombre();
+        visitante.setEdad();
+        visitante.setAtraccionesVisitadas();
+        visitante.setPuntosAcumulados();
         return true;
     }
 
@@ -224,5 +241,6 @@ public class Parque {
             sumaEdades += visitante.getEdad();
         }
         return (double) sumaEdades / visitantes.size();
+
     }
 }
