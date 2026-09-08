@@ -6,8 +6,7 @@ public class PuntoDeAcceso {
     private int capacidadMaximaPorHora;
     private String estado;
 
-    public PuntoDeAcceso(int codigo, String nombre, String ubicacion,
-            int capacidadMaximaPorHora, String estado) {
+    public PuntoDeAcceso(int codigo, String nombre, String ubicacion, int capacidadMaximaPorHora, String estado) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.ubicacion = ubicacion;
@@ -37,8 +36,7 @@ public class PuntoDeAcceso {
 
     public void setCapacidadMaximaPorHora(int capacidadMaximaPorHora) {
         if (capacidadMaximaPorHora <= 0) {
-            throw new IllegalArgumentException(
-                    "La capacidad máxima por hora debe ser mayor que 0.");
+            throw new IllegalArgumentException("La capacidad máxima por hora debe ser mayor que 0.");
         }
         this.capacidadMaximaPorHora = capacidadMaximaPorHora;
     }

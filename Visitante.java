@@ -6,8 +6,7 @@ public class Visitante {
     private int atraccionesVisitadas;
     private int puntosAcumulados;
 
-    public Visitante(int codigoDeEntrada, String nombre, int edad,
-            int atraccionesVisitadas, int puntosAcumulados) {
+    public Visitante(int codigoDeEntrada, String nombre, int edad, int atraccionesVisitadas, int puntosAcumulados) {
         this.codigoDeEntrada = codigoDeEntrada;
         this.nombre = nombre;
         setEdad(edad);
@@ -48,16 +47,14 @@ public class Visitante {
 
     public void setAtraccionesVisitadas(int atraccionesVisitadas) {
         if (atraccionesVisitadas < 0) {
-            throw new IllegalArgumentException(
-                    "Las atracciones visitadas no pueden ser negativas.");
+            throw new IllegalArgumentException("Las atracciones visitadas no pueden ser negativas.");
         }
         this.atraccionesVisitadas = atraccionesVisitadas;
     }
 
     public void setPuntosAcumulados(int puntosAcumulados) {
         if (puntosAcumulados < 0) {
-            throw new IllegalArgumentException(
-                    "Los puntos acumulados no pueden ser negativos.");
+            throw new IllegalArgumentException("Los puntos acumulados no pueden ser negativos.");
         }
         this.puntosAcumulados = puntosAcumulados;
     }

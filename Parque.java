@@ -94,8 +94,7 @@ public Parque(String nombre, int codigoIdentificacion, String nombreEncargado) {
     public PuntoDeAcceso obtenerPuntoMayorCapacidad() {
         PuntoDeAcceso mayor = null;
         for (PuntoDeAcceso punto : puntosDeAcceso) {
-            if (punto != null && (mayor == null
-                    || punto.getCapacidadMaximaPorHora() > mayor.getCapacidadMaximaPorHora())) {
+            if (punto != null && (mayor == null || punto.getCapacidadMaximaPorHora() > mayor.getCapacidadMaximaPorHora())) {
                 mayor = punto;
             }
         }
@@ -136,18 +135,14 @@ public Parque(String nombre, int codigoIdentificacion, String nombreEncargado) {
         if (visitante == null) {
             return false;
         }
-
-        // Se validan todos los números antes de cambiar cualquier dato.
         if (edad <= 0) {
             throw new IllegalArgumentException("La edad debe ser mayor que 0.");
         }
         if (atracciones < 0) {
-            throw new IllegalArgumentException(
-                    "Las atracciones visitadas no pueden ser negativas.");
+            throw new IllegalArgumentException("Las atracciones visitadas no pueden ser negativas.");
         }
         if (puntos < 0) {
-            throw new IllegalArgumentException(
-                    "Los puntos acumulados no pueden ser negativos.");
+            throw new IllegalArgumentException("Los puntos acumulados no pueden ser negativos.");
         }
 
         visitante.setNombre(nombre);
